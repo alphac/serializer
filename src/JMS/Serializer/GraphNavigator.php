@@ -248,6 +248,10 @@ final class GraphNavigator
                 $typeValue = (string) $data[$metadata->discriminatorFieldName];
                 break;
 
+            case is_object($data) && method_exists($data, 'attributes') && isset($data->attributes()->{$metadata->discriminatorFieldName}):
+                $typeValue = (string) $data->attributes()->{$metadata->discriminatorFieldName};
+                break;
+
             case is_object($data) && isset($data->{$metadata->discriminatorFieldName}):
                 $typeValue = (string) $data->{$metadata->discriminatorFieldName};
                 break;
